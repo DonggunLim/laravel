@@ -1,28 +1,117 @@
 <?php
 
-use App\Models\Job;
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home', [
-        'greeing' => 'hi',
-        'name' => 'donggun',
-    ]);
-});
+Route::view('/', 'home');
+Route::view('/contact', 'contact');
+Route::resource('jobs', JobController::class);
 
-Route::get('/jobs', function () {
-    $jobs = Job::with('employer')->simplePaginate(3);
-    return view('jobs', [
-        'jobs' => $jobs,
-    ]);
-});
+// Route::get('/', function () {
+//     return view('home', [
+//         'greeing' => 'hi',
+//         'name' => 'donggun',
+//     ]);
+// });
 
-Route::get('/jobs/{id}', function ($id) {
-    $job = Job::find($id);
+// Route::controller(JobController::class)->group(function () {
+//     Route::get('/jobs', 'index');
+//     Route::get('/jobs/create', 'create');
+//     Route::get('/jobs/{job}', 'show');
+//     Route::post('/jobs', 'store');
+//     Route::get('/jobs/{job}/edit', 'edit');
+//     Route::patch('/jobs/{job}', 'update');
+//     Route::delete('/jobs/{job}', 'destory');
+// });
 
-    return view('job', ['job' => $job]);
-});
+// Route::resource('jobs', JobController::class, [
+//     'except' => ['edit']
+// ]);
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+
+
+// jobs
+// Route::get('/jobs', function () {
+//     $jobs = Job::with('employer')->latest()->simplePaginate(3);
+//     return view('jobs.index', [
+//         'jobs' => $jobs,
+//     ]);
+// });
+
+// create
+// Route::get('/jobs/create', function () {
+//     return view('jobs.create');
+// });
+
+// show
+// Route::get('/jobs/{job}', function (Job $job) {
+//     // $job = Job::find($id);
+//     return view('jobs.show', ['job' => $job]);
+// });
+
+// store
+// Route::post('/jobs', function () {
+//     request()->validate([
+//         'title' => ['required', 'min:3'],
+//         'salary' => ['required'],
+//     ]);
+
+//     Job::create([
+//         'title' => request('title'),
+//         'salary' => request('salary'),
+//         'employer_id' => 1,
+//     ]);
+
+//     return redirect('/jobs');
+// });
+
+// Edit
+// Route::get('/jobs/{job}/edit', function (Job $job) {
+//     // $job = Job::find($id);
+
+//     return view('jobs.edit', ['job' => $job]);
+// });
+
+// Update
+// Route::patch('/jobs/{job}', function (Job $job) {
+//     // authorize
+
+//     // validate
+//     request()->validate([
+//         'title' => ['required', 'min:3'],
+//         'salary' => ['required'],
+//     ]);
+
+
+//     // update the job (two way)
+//     // $job = Job::findOrFail($id);
+
+//     // $job->title = request('title');
+//     // $job->salary = request('salary');
+//     // $job->save();
+
+//     $job->update([
+//         'title' => request('title'),
+//         'salary' => request('salary'),
+//     ]);
+
+//     // redireect to the job page 
+//     return redirect('/jobs/' . $job->id);
+// });
+
+// Destory
+// Route::delete('/jobs/{job}', function (Job $job) {
+//     // authorize
+
+//     //delete the job
+
+//     // $job = Job::findOrFail($id);
+//     $job->delete();
+//     // Job::findOrFail($id)->delete();
+//     return redirect('/jobs');
+// });
+
+
+// Route::get('/contact', function () {
+//     return view('contact');
+// });

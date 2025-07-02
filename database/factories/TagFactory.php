@@ -17,7 +17,32 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "name" => fake()->randomElement([
+                'PHP',
+                'Laravel',
+                'JavaScript',
+                'React',
+                'Vue.js',
+                'Node.js',
+                'Python',
+                'Django',
+                'Java',
+                'Spring',
+                'Docker',
+                'AWS',
+                'MySQL',
+                'PostgreSQL',
+                'Redis',
+                'Git',
+                'Linux',
+                'DevOps',
+                'Frontend',
+                'Backend',
+                'Fullstack',
+                'Remote',
+                'Senior',
+                'Junior'
+            ])
         ];
     }
 }
